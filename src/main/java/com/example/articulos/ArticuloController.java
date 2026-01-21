@@ -1,7 +1,9 @@
 package com.example.articulos;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -68,30 +70,34 @@ public class ArticuloController {
 
     @GetMapping("/reporte")
     public void generarReporte(HttpServletResponse response) throws Exception {
-        try {
-            response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition", "inline; filename=articulos.pdf");
 
-            List<Articulo> articulos = repo.findAll();
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "inline; filename=articulos.pdf");
 
-            InputStream reportStream = getClass().getResourceAsStream("/reports/articulos.jrxml");
+        List<Articulo> articulos = repo.findAll();
 
-            if (reportStream == null) {
-                throw new RuntimeException("No se encontró el archivo JRXML en /reports/articulos.jrxml");
-            }
+        InputStream reportStream
+                = getClass().getResourceAsStream("/reports/articulos.jrxml");
 
-            JasperReport jasperReport = JasperCompileManager.compileReport(reportStream);
-
-            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(articulos);
-
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-
-            JasperExportManager.exportReportToPdfStream(jasperPrint, response.getOutputStream());
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
+        if (reportStream == null) {
+            throw new RuntimeException("No se encontró /reports/articulos.jrxml");
         }
+
+        JasperReport jasperReport
+                = JasperCompileManager.compileReport(reportStream);
+
+        JRBeanCollectionDataSource dataSource
+                = new JRBeanCollectionDataSource(articulos);
+
+        Map<String, Object> params = new HashMap<>();
+
+        JasperPrint jasperPrint
+                = JasperFillManager.fillReport(jasperReport, params, dataSource);
+
+        var out = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(jasperPrint, out);
+        out.flush();
+        out.close();
     }
 
 }
