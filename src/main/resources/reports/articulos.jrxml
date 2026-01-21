@@ -12,7 +12,7 @@
               topMargin="20"
               bottomMargin="20">
 
-    <field name="id" class="java.lang.Integer"/>  <!-- A veces cambia Integer a Long, si lo hace regresar a poner Integer. -->
+    <field name="id" class="java.lang.Integer"/>
     <field name="nombre" class="java.lang.String"/>
     <field name="descripcion" class="java.lang.String"/>
     <field name="precio" class="java.lang.Double"/>
