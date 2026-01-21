@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="articulos"
+              pageWidth="595"
+              pageHeight="842"
+              columnWidth="555"
+              leftMargin="20"
+              rightMargin="20"
+              topMargin="20"
+              bottomMargin="20">
+
+    <field name="id" class="java.lang.Integer"/>  <!-- A veces cambia Integer a Long, si lo hace regresar a poner Integer. -->
+    <field name="nombre" class="java.lang.String"/>
+    <field name="descripcion" class="java.lang.String"/>
+    <field name="precio" class="java.lang.Double"/>
+
+    <title>
+        <band height="50">
+            <staticText>
+                <reportElement x="0" y="10" width="555" height="30"/>
+                <textElement textAlignment="Center">
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Reporte de Artículos]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <detail>
+        <band height="40" splitType="Stretch">
+            <textField><reportElement x="0" y="0" width="50" height="20"/><textFieldExpression><![CDATA[$F{id}]]></textFieldExpression></textField>
+            <textField><reportElement x="45" y="0" width="120" height="20"/><textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression></textField>
+            <textField isStretchWithOverflow="true"><reportElement x="170" y="0" width="260" height="20"/><textElement><font size="9"/></textElement><textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression></textField>
+            <textField><reportElement x="450" y="0" width="80" height="20"/><textFieldExpression><![CDATA[$F{precio}]]></textFieldExpression></textField>
+        </band>
+    </detail>
+
+</jasperReport>
