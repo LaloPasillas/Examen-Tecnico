@@ -38,21 +38,6 @@ El sistema permite generar un reporte en PDF que incluye:
 
 ---
 
-## Configuración
+**ACCESO**
 
-1. Crear base de datos:
-   sql
-CREATE DATABASE articulos;
-
-2. Configurar application.properties:
-spring.datasource.url=jdbc:mysql://localhost:3306/articulos
-spring.datasource.username=TU_USUARIO
-spring.datasource.password=TU_PASSWORD
-
-3. Ejecutar en la terminal:
-   mvn spring-boot:run
-
-**ACCESOS**
-
-- Aplicación: http://localhost:8081
-- Reporte PDF: http://localhost:8081/articulos/reporte
+- URL: https://examen-tecnico-production.up.railway.app/articulos
